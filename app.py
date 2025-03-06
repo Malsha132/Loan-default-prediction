@@ -103,20 +103,24 @@ if loan_type == "Personal Loan":
         lnpayfreq = st.selectbox("Payment Frequency", ["2", "5", "12"])
         credit_card_used = st.radio("Used Credit Card", ["No", "Yes"])
         debit_card_used = st.radio("Used Debit Card", ["No", "Yes"])
-        lnamount = st.slider("Loan Amount", min_value=1000, max_value=1000000, step=1000)
-        lninstamt = st.slider("Installment Amount", min_value=100, max_value=100000, step=100)
-        average_sagbal = st.slider("Average Savings Account Balance", min_value=0, max_value=1000000, step=1000)
-        age = st.slider("Age", min_value=18, max_value=80)
-        lnintrate = st.slider("Interest Rate", min_value=0.1, max_value=20.0, step=0.1)
+        
+        # Replaced sliders with text input
+        lnamount = st.text_input("Loan Amount", value="1000")
+        lninstamt = st.text_input("Installment Amount", value="100")
+        average_sagbal = st.text_input("Average Savings Account Balance", value="0")
+        age = st.text_input("Age", value="18")
+        lnintrate = st.text_input("Interest Rate", value="0.1")
+        
         submit_button = st.form_submit_button(label="Predict Default Risk")
 
     if submit_button:
+        # Convert inputs to appropriate types
         user_input = pd.DataFrame({
-            "LNAMOUNT": [lnamount],
-            "LNINTRATE": [lnintrate],
-            "LNINSTAMT": [lninstamt],
-            "AGE": [age],
-            "AVERAGE_SAGBAL": [average_sagbal],
+            "LNAMOUNT": [float(lnamount)],
+            "LNINTRATE": [float(lnintrate)],
+            "LNINSTAMT": [float(lninstamt)],
+            "AGE": [int(age)],
+            "AVERAGE_SAGBAL": [float(average_sagbal)],
             "QSPURPOSEDES": [qspurposedes],
             "QS_SECTOR": [qsector],
             "LNBASELDESC": [lnbase],
@@ -139,7 +143,8 @@ if loan_type == "Personal Loan":
             st.error("The loan is at risk of default.")
         else:
             st.success("The loan is not at risk of default.")
-            # Housing Loan Input Fields
+            
+# Housing Loan Input Fields (similar to Personal Loan fields)
 elif loan_type == "Housing Loan":
     st.header("Housing Loan Risk Prediction")
     
@@ -152,21 +157,24 @@ elif loan_type == "Housing Loan":
         credit_card_used = st.selectbox('Used Credit Card', ['No','Yes'])
         debit_card_used = st.selectbox('Used Debit Card', ['No','Yes'])
         lnperiod_category = st.selectbox('Loan Period Category', ['Short-Term', 'Medium-Term', 'Long-Term'])
-        lnamount = st.slider('Loan Amount', min_value=1000, max_value=1000000, step=1000)
-        lninstamt = st.slider('Installment Amount', min_value=100, max_value=100000, step=100)
-        average_sagbal = st.slider('Average Savings Account Balance', min_value=0, max_value=1000000, step=1000)
-        age = st.slider('Age', min_value=18, max_value=80)
-        lnintrate = st.slider('Interest Rate', min_value=0.1, max_value=20.0, step=0.1)
+        
+        # Replaced sliders with text input
+        lnamount = st.text_input('Loan Amount', value="1000")
+        lninstamt = st.text_input('Installment Amount', value="100")
+        average_sagbal = st.text_input('Average Savings Account Balance', value="0")
+        age = st.text_input('Age', value="18")
+        lnintrate = st.text_input('Interest Rate', value="0.1")
         
         submit_button = st.form_submit_button(label="Predict Default Risk")
 
     if submit_button:
+        # Convert inputs to appropriate types
         user_input = pd.DataFrame({
-            "LNAMOUNT": [lnamount],
-            "LNINTRATE": [lnintrate],
-            "LNINSTAMT": [lninstamt],
-            "AGE": [age],
-            "AVERAGE_SAGBAL": [average_sagbal],
+            "LNAMOUNT": [float(lnamount)],
+            "LNINTRATE": [float(lnintrate)],
+            "LNINSTAMT": [float(lninstamt)],
+            "AGE": [int(age)],
+            "AVERAGE_SAGBAL": [float(average_sagbal)],
             "QSPURPOSEDES": [qspurposedes],
             "QS_SECTOR": [qsector],
             "LNBASELDESC": [lnbase],
