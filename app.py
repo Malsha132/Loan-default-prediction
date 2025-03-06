@@ -22,7 +22,7 @@ st.title("Loan Default Risk Prediction")
 
 # Loan type selection section with image
 st.markdown(
-    
+    """
     <style>
     .section-one {
         background-image: url('background.jpg');  
@@ -32,10 +32,11 @@ st.markdown(
         color: white;
     }
     </style>
-   ,
+    """,
     unsafe_allow_html=True
 )
 
+# Wrap the loan type selection section with the background image style
 st.markdown('<div class="section-one">', unsafe_allow_html=True)
 st.header("Select Loan Type")
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
