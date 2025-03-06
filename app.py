@@ -23,7 +23,7 @@ def set_background(image_path):
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Function to set background image for Section 1 only
+# Function to set background image for Section 1 only with full width
 def set_section_one_background(image_path):
     base64_str = get_base64_image(image_path)
     section_bg_img = f"""
@@ -36,6 +36,7 @@ def set_section_one_background(image_path):
         padding: 50px;
         text-align: center;
         color: white;
+        width: 100%;
     }}
     </style>
     """
