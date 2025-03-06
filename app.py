@@ -22,17 +22,17 @@ st.title("Loan Default Risk Prediction")
 
 # Loan type selection section with image
 st.markdown(
-    """
+    
     <style>
     .section-one {
-        background-image: url('background.jpg');  /* Set your image URL here */
+        background-image: url('background.jpg');  
         background-size: cover;
         padding: 50px;
         text-align: center;
         color: white;
     }
     </style>
-    """,
+   ,
     unsafe_allow_html=True
 )
 
