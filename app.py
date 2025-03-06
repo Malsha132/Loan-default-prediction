@@ -22,13 +22,13 @@ st.title("Loan Default Risk Prediction")
 st.markdown("---")
 
 # Section 1: Loan Type Selection
-st.header("Step 1: Select Loan Type")
+st.header("Select Loan Type")
 loan_type = st.radio("Choose a loan type:", ["Personal Loan", "Housing Loan"], index=0)
 
 st.markdown("---")
 
 # Section 2: Input Fields
-st.header("Step 2: Enter Loan Details")
+st.header("Enter Loan Details")
 if loan_type == "Personal Loan":
     st.subheader("Personal Loan Risk Prediction")
     with st.form(key="personal_loan_form"):
@@ -39,7 +39,6 @@ if loan_type == "Personal Loan":
             lnbase = st.selectbox("Base", ["FINANCIAL INSTITUTIONS", "INDIVIDUALS", "MICRO FINANCE", "MIDDLE MARKET CORPORATES", "SME", "UNCLASSIFIED"])
             sex = st.selectbox("Gender", ["M", "F"])
             lnpayfreq = st.selectbox("Payment Frequency", ["2", "5", "12"])
-        with col2:
             credit_card_used = st.radio("Used Credit Card", ["No", "Yes"])
             debit_card_used = st.radio("Used Debit Card", ["No", "Yes"])
             lnamount = st.slider("Loan Amount", min_value=1000, max_value=1000000, step=1000)
