@@ -21,9 +21,25 @@ def predict_loan_default(input_data, model, scaler, columns):
 st.title("Loan Default Risk Prediction")
 
 # Loan type selection section with image
+st.markdown(
+    """
+    <style>
+    .section-one {
+        background-image: url('background.jpg');  /* Set your image URL here */
+        background-size: cover;
+        padding: 50px;
+        text-align: center;
+        color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown('<div class="section-one">', unsafe_allow_html=True)
 st.header("Select Loan Type")
-st.image("background.jpg", width=500)  # Replace with your image file
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
