@@ -3,27 +3,11 @@ import joblib
 import pandas as pd
 import base64
 
-# Function to get base64 encoding for image
+# Function to set background image for Section 1
 def get_base64_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
 
-# Function to set background image for the whole page
-def set_background(image_path):
-    base64_str = get_base64_image(image_path)
-    page_bg_img = f"""
-    <style>
-    .stApp {{
-        background-image: url("data:image/jpeg;base64,{base64_str}");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }}
-    </style>
-    """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
-
-# Function to set background image for Section 1 only
 def set_section_one_background(image_path):
     base64_str = get_base64_image(image_path)
     section_bg_img = f"""
@@ -41,20 +25,7 @@ def set_section_one_background(image_path):
     """
     st.markdown(section_bg_img, unsafe_allow_html=True)
 
-# Function to set background color for Section 2 only
-def set_section_two_background():
-    section_bg_color = """
-    <style>
-    .section-two {{
-        background-color: #f0f8ff;  /* Light blue background */
-        padding: 20px;
-        border-radius: 10px;
-    }}
-    </style>
-    """
-    st.markdown(section_bg_color, unsafe_allow_html=True)
-
-# Set the background image for the first section (before loan type selection)
+# Set the background image for Section 1 only
 set_section_one_background("background.jpg")
 
 # Load models and scalers
@@ -75,7 +46,7 @@ def predict_loan_default(input_data, model, scaler, columns):
 # Main Interface
 st.title("Loan Default Risk Prediction")
 
-# Section 1 - Background image before loan type selection
+# Loan type selection section
 st.markdown('<div class="section-one">', unsafe_allow_html=True)
 st.header("Select Loan Type")
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
@@ -83,10 +54,21 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
-# Section 2 - Background color after loan type selection
-set_section_two_background()  # Set background color for this section
+# Loan form section
+st.markdown(
+    """
+    <style>
+    .loan-section {
+        padding: 20px;
+        border-radius: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-st.markdown('<div class="section-two">', unsafe_allow_html=True)
+# Wrap the loan form section with the loan-section class
+st.markdown('<div class="loan-section">', unsafe_allow_html=True)
 
 # Personal Loan Input Fields
 if loan_type == "Personal Loan":
