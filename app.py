@@ -76,13 +76,19 @@ elif loan_type == "Housing Loan":
     st.subheader("Housing Loan Risk Prediction")
 
     with st.form(key="housing_loan_form"):
-        property_type = st.selectbox("Property Type", ["APARTMENT", "HOUSE", "COMMERCIAL PROPERTY"])
-        construction_status = st.selectbox("Construction Status", ["UNDER CONSTRUCTION", "COMPLETED"])
-        lnamount = st.slider("Loan Amount", min_value=100000, max_value=5000000, step=50000)
-        lninstamt = st.slider("Installment Amount", min_value=1000, max_value=500000, step=5000)
-        lnintrate = st.slider("Interest Rate", min_value=0.1, max_value=15.0, step=0.1)
+        qspurposedes = st.selectbox("Loan Purpose", ["CONSTRUCTION", "EDUCATION", "INVESTMENT", "PERSONAL NEEDS", "PURCHASE OF PROPERTY", "PURCHASE OF VEHICLE", "WORKING CAPITAL REQUIREMENT"])
+        qsector = st.selectbox("Sector", ["OTHER SERVICES", "CONSUMPTION", "MANUFACTURING & LOGISTIC", "FINANCIAL", "CONSTRUCTION & INFRASTRUCTURE", "EDUCATION", "TECHNOLOGY & INNOVATION", "TOURISM", "HEALTHCARE", "TRADERS", "AGRICULTURE & FISHING", "PROFESSIONAL, SCIENTIFIC & TECHNICAL ACTIV"])
+        lnbase = st.selectbox("Base", ["FINANCIAL INSTITUTIONS", "INDIVIDUALS", "MICRO FINANCE", "MIDDLE MARKET CORPORATES", "SME", "UNCLASSIFIED"])
+        sex = st.selectbox("Gender", ["M", "F"])
+        lnpayfreq = st.selectbox("Payment Frequency", ["2", "5", "12"])
+        credit_card_used = st.radio("Used Credit Card", ["No", "Yes"])
+        debit_card_used = st.radio("Used Debit Card", ["No", "Yes"])
+        lnamount = st.slider("Loan Amount", min_value=1000, max_value=1000000, step=1000)
+        lninstamt = st.slider("Installment Amount", min_value=100, max_value=100000, step=100)
+        average_sagbal = st.slider("Average Savings Account Balance", min_value=0, max_value=1000000, step=1000)
         age = st.slider("Age", min_value=18, max_value=80)
-        average_sagbal = st.slider("Average Savings Account Balance", min_value=0, max_value=5000000, step=10000)
+        lnintrate = st.slider("Interest Rate", min_value=0.1, max_value=20.0, step=0.1)
+
 
         submit_button = st.form_submit_button(label="Predict Default Risk")
 
