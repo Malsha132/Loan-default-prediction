@@ -99,7 +99,7 @@ if loan_type == "Personal Loan":
         lnbase = st.selectbox("Base", ["INDIVIDUALS", "SME", "MICRO FINANCE", "MIDDLE MARKET CORPORATES", "FINANCIAL INSTITUTIONS", "UNCLASSIFIED"])
         lnperiod = st.selectbox("Loan Period", ["SHORT-TERM", "MEDIUM-TERM", "LONG-TERM"])
 
-        sex = st.selectbox("Gender", ["M", "F"])
+        sex =  st.radio("Gender", ["M", "F"])
         lnpayfreq = st.selectbox("Payment Frequency", ["2", "5", "12"])
         credit_card_used = st.radio("Used Credit Card", ["No", "Yes"])
         debit_card_used = st.radio("Used Debit Card", ["No", "Yes"])
@@ -152,10 +152,10 @@ elif loan_type == "Housing Loan":
         qspurposedes = st.selectbox('Loan Purpose', ['CONSTRUCTION', 'EDUCATION', 'INVESTMENT', 'PERSONAL NEEDS', 'PURCHASE OF PROPERTY', 'PURCHASE OF VEHICLE', 'WORKING CAPITAL REQUIREMENT'])
         qsector = st.selectbox('Sector', ['OTHER SERVICES', 'CONSUMPTION', 'MANUFACTURING & LOGISTIC', 'FINANCIAL', 'CONSTRUCTION & INFRASTRUCTURE', 'EDUCATION', 'TECHNOLOGY & INNOVATION', 'TOURISM', 'HEALTHCARE', 'TRADERS', 'AGRICULTURE & FISHING', 'PROFESSIONAL, SCIENTIFIC & TECHNICAL ACTIV'])
         lnbase = st.selectbox('Base', ['FINANCIAL INSTITUTIONS', 'INDIVIDUALS', 'MICRO FINANCE', 'MIDDLE MARKET CORPORATES', 'SME', 'UNCLASSIFIED'])
-        sex = st.selectbox('Gender', ['M', 'F'])
+        sex = st.radio('Gender', ['M', 'F'])
         lnpayfreq = st.selectbox('Payment Frequency', ['2', '5', '12'])
-        credit_card_used = st.selectbox('Used Credit Card', ['No','Yes'])
-        debit_card_used = st.selectbox('Used Debit Card', ['No','Yes'])
+        credit_card_used = st.radio('Used Credit Card', ['No','Yes'])
+        debit_card_used = st.radio('Used Debit Card', ['No','Yes'])
         lnperiod_category = st.selectbox('Loan Period Category', ['Short-Term', 'Medium-Term', 'Long-Term'])
         
         # Replaced sliders with text input
