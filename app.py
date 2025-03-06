@@ -3,27 +3,30 @@ import joblib
 import pandas as pd
 import base64
 
-# Function to set background image
+# Function to set background image for Section 1
 def get_base64_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
 
-def set_background(image_path):
+def set_section_one_background(image_path):
     base64_str = get_base64_image(image_path)
-    page_bg_img = f"""
+    section_bg_img = f"""
     <style>
-    .stApp {{
+    .section-one {{
         background-image: url("data:image/jpeg;base64,{base64_str}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        padding: 50px;
+        text-align: center;
+        color: white;
     }}
     </style>
     """
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+    st.markdown(section_bg_img, unsafe_allow_html=True)
 
-# Set the background image
-set_background("background.jpg")
+# Set the background image for Section 1 only
+set_section_one_background("background.jpg")
 
 # Load models and scalers
 personal_model = joblib.load("classification_model_personal.pkl")
@@ -44,20 +47,6 @@ def predict_loan_default(input_data, model, scaler, columns):
 st.title("Loan Default Risk Prediction")
 
 # Loan type selection section
-st.markdown(
-    """
-    <style>
-    .section-one {
-        padding: 50px;
-        text-align: center;
-        color: white;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# Wrap the loan type selection section
 st.markdown('<div class="section-one">', unsafe_allow_html=True)
 st.header("Select Loan Type")
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
