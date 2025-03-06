@@ -1,6 +1,29 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import base64
+
+# Function to set background image
+def get_base64_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode()
+
+def set_background(image_path):
+    base64_str = get_base64_image(image_path)
+    page_bg_img = f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/jpeg;base64,{base64_str}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }}
+    </style>
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Set the background image
+set_background("background.jpg")
 
 # Load models and scalers
 personal_model = joblib.load("classification_model_personal.pkl")
@@ -20,13 +43,11 @@ def predict_loan_default(input_data, model, scaler, columns):
 # Main Interface
 st.title("Loan Default Risk Prediction")
 
-# Loan type selection section with image
+# Loan type selection section
 st.markdown(
     """
     <style>
     .section-one {
-        background-image: url('background.jpg');  
-        background-size: cover;
         padding: 50px;
         text-align: center;
         color: white;
@@ -36,7 +57,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Wrap the loan type selection section with the background image style
+# Wrap the loan type selection section
 st.markdown('<div class="section-one">', unsafe_allow_html=True)
 st.header("Select Loan Type")
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
@@ -44,12 +65,11 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
-# Apply background color to section 2
+# Loan form section
 st.markdown(
     """
     <style>
     .loan-section {
-        background-color: #f0f8ff;  /* Light blue background */
         padding: 20px;
         border-radius: 10px;
     }
@@ -58,7 +78,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Wrap the loan form section with a div
+# Wrap the loan form section with the loan-section class
 st.markdown('<div class="loan-section">', unsafe_allow_html=True)
 
 # Personal Loan Input Fields
