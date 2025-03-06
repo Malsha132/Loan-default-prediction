@@ -32,8 +32,10 @@ if loan_type == "Personal Loan":
     
     with st.form(key="personal_loan_form"):
         qspurposedes = st.selectbox("Loan Purpose", ["CONSTRUCTION", "EDUCATION", "INVESTMENT", "PERSONAL NEEDS", "PURCHASE OF PROPERTY", "PURCHASE OF VEHICLE", "WORKING CAPITAL REQUIREMENT"])
-        qsector = st.selectbox("Sector", ["OTHER SERVICES", "CONSUMPTION", "MANUFACTURING & LOGISTIC", "FINANCIAL", "CONSTRUCTION & INFRASTRUCTURE", "EDUCATION", "TECHNOLOGY & INNOVATION", "TOURISM", "HEALTHCARE", "TRADERS", "AGRICULTURE & FISHING", "PROFESSIONAL, SCIENTIFIC & TECHNICAL ACTIV"])
-        lnbase = st.selectbox("Base", ["FINANCIAL INSTITUTIONS", "INDIVIDUALS", "MICRO FINANCE", "MIDDLE MARKET CORPORATES", "SME", "UNCLASSIFIED"])
+        qsector = st.selectbox("Sector", ["OTHER SERVICES", "CONSUMPTION", "MANUFACTURING & LOGISTICS", "FINANCIAL", "CONSTRUCTION & INFRASTRUCTURE", "EDUCATION", "TECHNOLOGY & INNOVATION", "TOURISM", "HEALTHCARE", "TRADERS", "AGRICULTURE & FISHINIG", "PROFESSIONAL, SCIENTIFIC & TECHNICAL ACTIV"])
+        lnbase = st.selectbox("Base", ["INDIVIDUALS", "SME", "MICRO FINANCE", "MIDDLE MARKET CORPORATES", "FINANCIAL INSTITUTIONS", "UNCLASSIFIED"])
+        lnperiod = st.selectbox("Loan Period", ["SHORT-TERM", "MEDIUM-TERM", "LONG-TERM"])
+
         sex = st.selectbox("Gender", ["M", "F"])
         lnpayfreq = st.selectbox("Payment Frequency", ["2", "5", "12"])
         credit_card_used = st.radio("Used Credit Card", ["No", "Yes"])
@@ -55,13 +57,14 @@ if loan_type == "Personal Loan":
             "QSPURPOSEDES": [qspurposedes],
             "QS_SECTOR": [qsector],
             "LNBASELDESC": [lnbase],
+            "LNPERIOD_CATEGORY": [lnperiod],
             "SEX": [sex],
             "LNPAYFREQ": [lnpayfreq],
             "CREDIT_CARD_USED": [credit_card_used],
             "DEBIT_CARD_USED": [debit_card_used]
         })
 
-        user_input = pd.get_dummies(user_input, columns=["QSPURPOSEDES", "QS_SECTOR", "LNBASELDESC", "SEX", "LNPAYFREQ", "CREDIT_CARD_USED", "DEBIT_CARD_USED"], drop_first=True)
+        user_input = pd.get_dummies(user_input, columns=["QSPURPOSEDES", "QS_SECTOR", "LNBASELDESC", "SEX", "LNPAYFREQ", "CREDIT_CARD_USED", "DEBIT_CARD_USED",'LNPERIOD_CATEGORY'], drop_first=True)
         missing_cols = set(personal_columns) - set(user_input.columns)
         for col in missing_cols:
             user_input[col] = 0
@@ -86,7 +89,7 @@ elif loan_type == "Housing Loan":
         lnpayfreq = st.selectbox('Payment Frequency', ['2', '5', '12'])
         credit_card_used = st.selectbox('Used Credit Card', ['No','Yes'])
         debit_card_used = st.selectbox('Used Debit Card', ['No','Yes'])
-        lnperiod_category = st.selectbox('Loan Period Category', ['SHORT-TERM', 'MEDIUM-TERM', 'LONG-TERM'])
+        lnperiod_category = st.selectbox('Loan Period Category', ['Short-Term', 'Medium-Term', 'Long-Term'])
         lnamount = st.slider('Loan Amount', min_value=1000, max_value=1000000, step=1000)
         lninstamt = st.slider('Installment Amount', min_value=100, max_value=100000, step=100)
         average_sagbal = st.slider('Average Savings Account Balance', min_value=0, max_value=1000000, step=1000)
@@ -105,13 +108,14 @@ elif loan_type == "Housing Loan":
             "QSPURPOSEDES": [qspurposedes],
             "QS_SECTOR": [qsector],
             "LNBASELDESC": [lnbase],
+            "LNPERIOD_CATEGORY" :[lnperiod_category],
             "SEX": [sex],
             "LNPAYFREQ": [lnpayfreq],
             "CREDIT_CARD_USED": [credit_card_used],
             "DEBIT_CARD_USED": [debit_card_used]
         })
 
-        user_input = pd.get_dummies(user_input, columns=["QSPURPOSEDES", "QS_SECTOR", "LNBASELDESC", "SEX", "LNPAYFREQ", "CREDIT_CARD_USED", "DEBIT_CARD_USED"], drop_first=True)
+        user_input = pd.get_dummies(user_input, columns=["QSPURPOSEDES", "QS_SECTOR", "LNBASELDESC", "SEX", "LNPAYFREQ", "CREDIT_CARD_USED", "DEBIT_CARD_USED",'LNPERIOD_CATEGORY'], drop_first=True)
         missing_cols = set(housing_columns) - set(user_input.columns)
         for col in missing_cols:
             user_input[col] = 0
