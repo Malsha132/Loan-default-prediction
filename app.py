@@ -56,7 +56,7 @@ def set_section_two_background():
     st.markdown(section_bg_color, unsafe_allow_html=True)
 
 # Set the background image for the first section (before loan type selection)
-set_section_one_background("background.jpg")
+set_section_one_background("image.jpg")
 
 # Load models and scalers
 personal_model = joblib.load("classification_model_personal.pkl")
