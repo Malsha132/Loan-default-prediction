@@ -15,7 +15,7 @@ def set_background(image_path):
     <style>
     .stApp {{
         background-image: url("data:image/jpeg;base64,{base64_str}");
-        background-size: cover;
+        background-size: cover; /* Ensures the image covers the entire screen */
         background-position: center;
         background-repeat: no-repeat;
     }}
@@ -23,24 +23,26 @@ def set_background(image_path):
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Function to set background image for Section 1 only with full width
+# Function to set background image for Section 1 only with improved scaling
 def set_section_one_background(image_path):
     base64_str = get_base64_image(image_path)
     section_bg_img = f"""
     <style>
     .section-one {{
         background-image: url("data:image/jpeg;base64,{base64_str}");
-        background-size: cover;
+        background-size: 100% auto; /* Adjust width while maintaining aspect ratio */
         background-position: center;
         background-repeat: no-repeat;
         padding: 50px;
         text-align: center;
         color: white;
         width: 100%;
+        min-height: 250px; /* Ensures it has a proper height */
     }}
     </style>
     """
     st.markdown(section_bg_img, unsafe_allow_html=True)
+
 
 # Function to set background color for Section 2 only
 def set_section_two_background():
