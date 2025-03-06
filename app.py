@@ -91,7 +91,7 @@ elif loan_type == "Housing Loan":
     average_sagbal = st.slider('Average Savings Account Balance', min_value=0, max_value=1000000, step=1000)
     age = st.slider('Age', min_value=18, max_value=80)
     lnintrate = st.slider('Interest Rate', min_value=0.1, max_value=20.0, step=0.1)
-
+    submit_button = st.form_submit_button(label="Predict Default Risk")
     if submit_button:
         user_input = pd.DataFrame({
             "LNAMOUNT": [lnamount],
