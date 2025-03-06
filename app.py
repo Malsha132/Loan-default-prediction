@@ -41,8 +41,21 @@ def set_section_one_background(image_path):
     """
     st.markdown(section_bg_img, unsafe_allow_html=True)
 
-# Set the background image for the whole page
-set_background("background.jpg")
+# Function to set background color for Section 2 only
+def set_section_two_background():
+    section_bg_color = """
+    <style>
+    .section-two {{
+        background-color: #f0f8ff;  /* Light blue background */
+        padding: 20px;
+        border-radius: 10px;
+    }}
+    </style>
+    """
+    st.markdown(section_bg_color, unsafe_allow_html=True)
+
+# Set the background image for the first section (before loan type selection)
+set_section_one_background("background.jpg")
 
 # Load models and scalers
 personal_model = joblib.load("classification_model_personal.pkl")
@@ -62,9 +75,7 @@ def predict_loan_default(input_data, model, scaler, columns):
 # Main Interface
 st.title("Loan Default Risk Prediction")
 
-# Loan type selection section
-set_section_one_background("background.jpg")  # Set the background image for this section
-
+# Section 1 - Background image before loan type selection
 st.markdown('<div class="section-one">', unsafe_allow_html=True)
 st.header("Select Loan Type")
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
@@ -72,21 +83,10 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 st.divider()
 
-# Loan form section
-st.markdown(
-    """
-    <style>
-    .loan-section {
-        padding: 20px;
-        border-radius: 10px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Section 2 - Background color after loan type selection
+set_section_two_background()  # Set background color for this section
 
-# Wrap the loan form section with the loan-section class
-st.markdown('<div class="loan-section">', unsafe_allow_html=True)
+st.markdown('<div class="section-two">', unsafe_allow_html=True)
 
 # Personal Loan Input Fields
 if loan_type == "Personal Loan":
