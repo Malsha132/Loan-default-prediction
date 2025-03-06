@@ -22,7 +22,7 @@ st.title("Loan Default Risk Prediction")
 
 # Loan type selection section with image
 st.header("Select Loan Type")
-st.image("loan_image.jpg", width=500)  # Replace with your image file
+st.image("background.jpg", width=500)  # Replace with your image file
 loan_type = st.radio("", ["Personal Loan", "Housing Loan"])
 
 st.divider()
