@@ -96,13 +96,13 @@ if loan_type == "Personal Loan":
     st.header("Personal Loan Risk Prediction")
     
     with st.form(key="personal_loan_form"):
-        qspurposedes = st.selectbox("Loan Purpose", ["CONSTRUCTION", "EDUCATION", "INVESTMENT", "PERSONAL NEEDS", "PURCHASE OF PROPERTY", "PURCHASE OF VEHICLE", "WORKING CAPITAL REQUIREMENT"])
-        qsector = st.selectbox("Sector", ["OTHER SERVICES", "CONSUMPTION", "MANUFACTURING & LOGISTICS", "FINANCIAL", "CONSTRUCTION & INFRASTRUCTURE", "EDUCATION", "TECHNOLOGY & INNOVATION", "TOURISM", "HEALTHCARE", "TRADERS", "AGRICULTURE & FISHING", "PROFESSIONAL, SCIENTIFIC & TECHNICAL ACTIV"])
+        qspurposedes = st.selectbox("Loan Purpose", ["CONSTRUCTION", "PERSONAL NEEDS","PURCHASE OF VEHICLE","WORKING CAPITAL REQUIREMENT","EDUCATION","INVESTMENT","PURCHASE OF PROPERTY"])
+        qsector = st.selectbox("Sector", ["OTHER SERVICES", "MANUFACTURING & LOGISTICS", "MANUFACTURING & LOGISTICS", "FINANCIAL", "TOURISM", "TECHNOLOGY & INNOVATION","HEALTHCARE","CONSUMPTION","EDUCATION","CONSTRUCTION & INFRASTRUCTURE","TRADERS","AGRICULTURE & FISHINIG","PROFESSIONAL, SCIENTIFIC & TECHNICAL ACTIV"])
         lnbase = st.selectbox("Base", ["INDIVIDUALS", "SME", "MICRO FINANCE", "MIDDLE MARKET CORPORATES", "FINANCIAL INSTITUTIONS", "UNCLASSIFIED"])
-        lnperiod = st.selectbox("Loan Period", ["SHORT-TERM", "MEDIUM-TERM", "LONG-TERM"])
-
-        sex =  st.radio("Gender", ["M", "F"])
-        lnpayfreq = st.selectbox("Payment Frequency", ["2", "5", "12"])
+        lnperiod = st.selectbox("Loan Period", ["MEDIUM-TERM", "SHORT-TERM", "LONG-TERM"])
+        region=st.selectbox("Region",["Colombo Region","Other","Greater Colombo Region","North Central Region","Uva / Sabaragamuwa Region","Southern Region","Central Region","Nothern Region","South Western Region","North Western Region","Eastern Region"])
+        sex =  st.radio("Gender", ["F", "M"])
+        lnpayfreq = st.selectbox("Payment Frequency", ["5", "12", "2"])
         credit_card_used = st.radio("Used Credit Card", ["No", "Yes"])
         debit_card_used = st.radio("Used Debit Card", ["No", "Yes"])
         
@@ -119,10 +119,12 @@ if loan_type == "Personal Loan":
         # Convert inputs to appropriate types
         user_input = pd.DataFrame({
             "LNAMOUNT": [float(lnamount)],
-            "LNINTRATE": [float(lnintrate)],
+            
             "LNINSTAMT": [float(lninstamt)],
-            "AGE": [int(age)],
+            
             "AVERAGE_SAGBAL": [float(average_sagbal)],
+            "AGE": [int(age)],
+            "LNINTRATE": [float(lnintrate)],
             "QSPURPOSEDES": [qspurposedes],
             "QS_SECTOR": [qsector],
             "LNBASELDESC": [lnbase],
@@ -130,10 +132,11 @@ if loan_type == "Personal Loan":
             "SEX": [sex],
             "LNPAYFREQ": [lnpayfreq],
             "CREDIT_CARD_USED": [credit_card_used],
-            "DEBIT_CARD_USED": [debit_card_used]
+            "DEBIT_CARD_USED": [debit_card_used],
+            "LNRGNNAME" : [region]
         })
 
-        user_input = pd.get_dummies(user_input, columns=["QSPURPOSEDES", "QS_SECTOR", "LNBASELDESC", "SEX", "LNPAYFREQ", "CREDIT_CARD_USED", "DEBIT_CARD_USED",'LNPERIOD_CATEGORY'], drop_first=True)
+        user_input = pd.get_dummies(user_input, columns=["QSPURPOSEDES", "QS_SECTOR", "LNBASELDESC", "SEX", "LNPAYFREQ", "CREDIT_CARD_USED", "DEBIT_CARD_USED",'LNPERIOD_CATEGORY','LNRGNNAME'], drop_first=True)
         missing_cols = set(personal_columns) - set(user_input.columns)
         for col in missing_cols:
             user_input[col] = 0
